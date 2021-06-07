@@ -30,7 +30,11 @@ export default Route.extend({
         controller.setProperties({
             pendingAdoption: model.fostered.filterBy('status', 'Pending Adoption'),
             intake: model.intake,
-            fostered: model.fostered.filterBy('status', 'Fostered'),
+            fostered: model.fostered.filter((dog) => {
+                const status = dog.get('status');
+
+                return status === 'Fostered' || status === 'Foster to Adopt' || status === 'Fostered - Hold'
+            }),
             adopted: model.adopted.filter((dog) => {
                 return dog.get('app_adoption_date').getUTCFullYear() === 2021
             }).sortBy('app_adoption_date').reverse(),
