@@ -16,11 +16,12 @@
         <ul class="card-container">
             {{#each filteredDogs as |dog|}}
                 {{card
-                    name=dog.name
+                    ageAndGender=dog.ageAndGender
+                    attributes=dog.pet_attributes
                     description=dog.description
                     defaultImage=dog.pet_image
-                    attributes=dog.pet_attributes
                     gender=dog.sex
+                    name=dog.name
                     launchModal=(action "launchModal")
                     readMore=(action "readMore" dog)
                 }}
@@ -40,11 +41,12 @@
         <ul class="card-container">
             {{#each comingSoonDogs as |dog|}}
                 {{card
-                    name=dog.name
+                    ageAndGender=dog.ageAndGender
+                    attributes=dog.pet_attributes
                     description=dog.description
                     defaultImage=dog.pet_image
-                    attributes=dog.pet_attributes
                     gender=dog.sex
+                    name=dog.name
                     launchModal=(action "launchModal")
                     readMore=(action "readMore" dog)
                 }}
@@ -66,11 +68,12 @@
         <ul class="card-container">
             {{#each adoptionPendingDogs as |dog|}}
                 {{card
-                    name=dog.name
+                    ageAndGender=dog.ageAndGender
+                    attributes=dog.pet_attributes
                     description=dog.description
                     defaultImage=dog.pet_image
-                    attributes=dog.pet_attributes
                     gender=dog.sex
+                    name=dog.name
                     launchModal=(action "launchModal")
                     readMore=(action "readMore" dog)
                 }}

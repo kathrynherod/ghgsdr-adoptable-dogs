@@ -63,6 +63,13 @@
                     text-transform: uppercase;
                 }
 
+                &__subtitle {
+                    color: $gray-dark;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    margin-bottom: 0.5rem;
+                }
+
                 &__text {
                     flex: 1 1 auto;
                     font-size: 1rem;

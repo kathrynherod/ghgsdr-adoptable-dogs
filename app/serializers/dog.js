@@ -40,6 +40,8 @@ export default DS.JSONSerializer.extend(EmbeddedRecordsMixin, {
             age = '1 year'
         }
 
+        modifiedHash.ageAndGender = `${modifiedHash.sex} - ${age} old`;
+
         modifiedHash.pet_attributes.push({
             name: 'Weight',
             value: modifiedHash.weight || 'unknown',

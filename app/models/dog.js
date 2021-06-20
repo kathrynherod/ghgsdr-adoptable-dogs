@@ -5,6 +5,7 @@ export default Model.extend({
     age: DS.attr('string'),
     acquired_by: DS.attr('string'),
     adoptionStatus: DS.attr('string'),
+    ageAndGender: DS.attr('string'),
     current_location_zip: DS.attr('string'),
     date_aquired: DS.attr('date'),
     date_of_birth: DS.attr('date'),
