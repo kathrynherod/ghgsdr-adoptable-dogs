@@ -27,14 +27,21 @@ export default Route.extend({
     },
 
     setupController(controller, model) {
-        controller.setProperties({
-            pendingAdoption: model.fostered.filterBy('status', 'Pending Adoption'),
-            intake: model.intake,
-            fostered: model.fostered.filter((dog) => {
-                const status = dog.get('status');
+        const fostered = [];
+        const pendingAdoption = [];
+        const fosterStatuses = ['Fostered', 'Foster to Adopt', 'Fostered - Hold'];
 
-                return status === 'Fostered' || status === 'Foster to Adopt' || status === 'Fostered - Hold'
-            }),
+        model.fostered.forEach((dog) => {
+            if (fosterStatuses.some((status) =>  status === dog.get('status'))) {
+                fostered.push(dog);
+            } else {
+                pendingAdoption.push(dog);
+            }
+        })
+        controller.setProperties({
+            pendingAdoption,
+            intake: model.intake,
+            fostered,
             adopted: model.adopted.filter((dog) => {
                 return dog.get('app_adoption_date').getUTCFullYear() === 2021
             }).sortBy('app_adoption_date').reverse(),

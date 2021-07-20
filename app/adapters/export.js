@@ -12,7 +12,7 @@ export default DS.JSONAPIAdapter.extend({
 
     urlForQuery (query) {
         let queryParams;
-        let limit = 25;
+        let limit = 50;
 
         if (query.type === 'intake') {
             queryParams = '&search[status]=Intake,Treatment,Boarding';
