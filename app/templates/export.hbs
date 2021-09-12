@@ -1,5 +1,5 @@
 <div class="divider">
-    <h1>Boarding/Treatment</h1>
+    <h1>{{boardingTreatmentText}}</h1>
 </div>
 <div class="table-responsive">
     {{table
@@ -10,7 +10,7 @@
 </div>
 
 <div class="divider">
-    <h1>Fostered</h1>
+    <h1>{{fosteredText}}</h1>
 </div>
 {{table
     dogs=fostered
@@ -18,7 +18,7 @@
     status="Foster"
 }}
 <div class="divider">
-    <h1>Pending Adoption</h1>
+    <h1>{{pendingAdoptionText}}</h1>
 </div>
 {{table
     dogs=pendingAdoption
@@ -26,7 +26,7 @@
     status="Foster"
 }}
 <div class="divider">
-    <h1>Adopted</h1>
+    <h1>{{adoptedText}}</h1>
 </div>
 {{table
     dogs=adopted

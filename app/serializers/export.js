@@ -23,10 +23,11 @@ export default DS.JSONSerializer.extend(EmbeddedRecordsMixin, {
         const hwStat = modifiedHash.pet_attributes.find((attr) => attr.name === 'Heartworm Status');
         const hwTreatmentDate = modifiedHash.pet_attributes.find((attr) => attr.name === 'HW Treatment Start Date');
 
+        const hadHW = hwStat.value === 'Positive' || hwStat.value === 'Treated';
         modifiedHash.hw_status = hwStat.value;
-        modifiedHash.hw_treatment_date =
-            hwStat.value === 'Positive' || hwStat.value === 'Treated' ?
-                hwTreatmentDate && hwTreatmentDate.value ? hwTreatmentDate.value : 'need date' :
+        modifiedHash.hw_treatment_date = hadHW ?
+                hwTreatmentDate && hwTreatmentDate.value ?
+                    hwTreatmentDate.value : 'need date' :
                 null;
         modifiedHash.current_location = modifiedHash.current_location.split(',')[0];
 
@@ -36,15 +37,17 @@ export default DS.JSONSerializer.extend(EmbeddedRecordsMixin, {
             modifiedHash.days_in_rescue = Math.floor((new Date() - new Date(modifiedHash.date_aquired)) / (60*60*24*1000));
         }
 
-        if (resourceHash.status === 'Boarding') {
-            modifiedHash.to_foster_date = new Date();
-            modifiedHash.to_foster_date  = modifiedHash.to_foster_date.toUTCString();
+        if (resourceHash.status === 'Boarding' || resourceHash.status === 'Treatment' || resourceHash.status === 'Intake') {
+            let toFosterDate = new Date();
 
-        } else if (resourceHash.status === 'Treatment' && new Date(modifiedHash.hw_treatment_date)) {
-            const date = new Date(modifiedHash.hw_treatment_date);
-            date.setDate(date.getDate() + 30);
+            if (hadHW) {
+                const date = new Date(modifiedHash.hw_treatment_date);
+                date.setDate(date.getDate() + 30);
 
-            modifiedHash.to_foster_date = date.toUTCString();
+                toFosterDate = date;
+            }
+
+            modifiedHash.to_foster_date  = toFosterDate.toUTCString();
         }
 
         return this._super(modelClass, modifiedHash);
