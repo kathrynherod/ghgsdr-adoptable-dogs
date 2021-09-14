@@ -29,8 +29,12 @@ export default DS.JSONSerializer.extend(EmbeddedRecordsMixin, {
                 hwTreatmentDate && hwTreatmentDate.value ?
                     hwTreatmentDate.value : 'need date' :
                 null;
-        modifiedHash.current_location = modifiedHash.current_location.split(',')[0];
+        modifiedHash.current_location = modifiedHash.current_location && modifiedHash.current_location.indexOf(',') ?
+            modifiedHash.current_location.split(',')[0] : `!!Update Petstablished with Pet's Location`;
 
+        if (modifiedHash.numerical_age === 'N/A') {
+            modifiedHash.numerical_age = `!!Update Petstablished with Pet's DOB`;
+        }
         if (resourceHash.status === 'Adopted') {
             modifiedHash.days_in_rescue = Math.floor((new Date(modifiedHash.app_adoption_date) - new Date(modifiedHash.date_aquired)) / (60*60*24*1000));
         } else {
