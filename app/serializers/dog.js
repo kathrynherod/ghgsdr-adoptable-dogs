@@ -131,6 +131,7 @@ export default DS.JSONSerializer.extend(EmbeddedRecordsMixin, {
             return modifiedAttr;
         }).sortBy('index');
 
+        modifiedHash.pet_attributes = modifiedHash.pet_attributes.filter((attr) =>  attr.name !== 'Microchip Registered')
         return this._super(typeClass, modifiedHash)
     },
 });

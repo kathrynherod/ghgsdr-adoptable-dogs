@@ -3,6 +3,9 @@ import DogModel from './dog';
 
 export default DogModel.extend({
     meta: DS.attr(),
+    microchip_id: DS.attr('string'),
+    microchipRegistered: DS.attr('string'),
+    spayNeuter: DS.attr('string'),
     hw_status: DS.attr('string'),
     current_location: DS.attr('string'),
     app_foster_date: DS.attr('date'),

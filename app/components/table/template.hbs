@@ -13,6 +13,9 @@
         <th scope="col">Current Status</th>
         <th scope="col">{{locationName}}</th>
         <th scope="col">{{status}} Date</th>
+        <th scope="col">Spay/Neuter?</th>
+        <th scope="col">Microchip Id</th>
+        <th scope="col">Chip Registered?</th>
     </tr>
 </thead>
 <tbody>
@@ -43,6 +46,9 @@
             {{else}}
                 <td>{{moment-format dog.app_foster_date 'MM/DD/YYYY'}}</td>
             {{/if}}
+            <td>{{dog.spayNeuter}}</td>
+            <td>{{dog.microchip_id}}</td>
+            <td>{{dog.microchipRegistered}}</td>
         </tr>
     {{/each}}
 </tbody>

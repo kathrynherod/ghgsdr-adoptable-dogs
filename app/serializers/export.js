@@ -22,7 +22,8 @@ export default DS.JSONSerializer.extend(EmbeddedRecordsMixin, {
         const modifiedHash = resourceHash;
         const hwStat = modifiedHash.pet_attributes.find((attr) => attr.name === 'Heartworm Status');
         const hwTreatmentDate = modifiedHash.pet_attributes.find((attr) => attr.name === 'HW Treatment Start Date');
-
+        modifiedHash.spayNeuter = modifiedHash.pet_attributes.find((attr) => attr.name === 'Spayed/Neutered').value;
+        modifiedHash.microchipRegistered = modifiedHash.pet_attributes.find((attr) =>  attr.name === 'Microchip Registered').value;
         const hadHW = hwStat.value === 'Positive' || hwStat.value === 'Treated';
         modifiedHash.hw_status = hwStat.value;
         modifiedHash.hw_treatment_date = hadHW ?
