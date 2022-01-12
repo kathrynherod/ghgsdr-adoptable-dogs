@@ -13,6 +13,7 @@ export default DS.JSONAPIAdapter.extend({
     urlForQuery (query) {
         let queryParams;
         let limit;
+        let page = query.page || 1;
 
         if (query.type === 'intake') {
             queryParams = '&search[status]=Intake,Treatment,Boarding';
@@ -21,8 +22,8 @@ export default DS.JSONAPIAdapter.extend({
             queryParams = '&search[status]=Fostered,Fostered - Pending Adoption,Pending Adoption,Foster to Adopt, Fostered - Hold';
 
         } else if (query.type === 'adopted') {
-            queryParams = '&search[status]=Adopted&sort[order]=desc';
-            limit = 150;
+            queryParams = `&search[status]=Adopted&sort[order]=desc&pagination[page]=${page}`
+            limit = 125;
         }
 
         queryParams = encodeURI(`${queryParams}&pagination[limit]=${limit}`);

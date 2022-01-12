@@ -15,6 +15,6 @@ export default Controller.extend({
     }),
 
     adoptedText: computed('adopted.length', function() {
-        return `Adopted in 2021 (${this.get('adopted.length')})`;
+        return `Adopted in 2022 (${this.get('adopted.length')})`;
     }),
 });

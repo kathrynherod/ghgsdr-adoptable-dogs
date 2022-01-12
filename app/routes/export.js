@@ -14,7 +14,7 @@ export default Route.extend({
         return hash({
             intake: this.store.query('export', { type: 'intake'}),
             fostered: this.store.query('export', { type: 'fostered'}),
-            adopted: this.store.query('export', { type: 'adopted'}),
+            adopted: this.store.query('export', { type: 'adopted', page: 2 }),
         });
     },
 
@@ -43,7 +43,7 @@ export default Route.extend({
             intake: model.intake,
             fostered,
             adopted: model.adopted.filter((dog) => {
-                return dog.get('app_adoption_date').getUTCFullYear() === 2021
+                return dog.get('app_adoption_date').getUTCFullYear() === 2022
             }).sortBy('app_adoption_date').reverse(),
         });
     },
