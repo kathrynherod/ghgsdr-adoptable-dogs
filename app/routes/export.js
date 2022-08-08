@@ -14,7 +14,8 @@ export default Route.extend({
         return hash({
             intake: this.store.query('export', { type: 'intake'}),
             fostered: this.store.query('export', { type: 'fostered'}),
-            adopted: this.store.query('export', { type: 'adopted', page: 2 }),
+            adoptedP1: this.store.query('export', { type: 'adopted', page: 1 }),
+            adoptedP2: this.store.query('export', { type: 'adopted', page: 2 }),
         });
     },
 
@@ -38,12 +39,17 @@ export default Route.extend({
                 pendingAdoption.push(dog);
             }
         })
+
+        const adopted = [...model.adoptedP1.toArray(), ...model.adoptedP2.toArray()]
+        const date = new Date;
+        const year = date.getFullYear();
+
         controller.setProperties({
             pendingAdoption,
             intake: model.intake,
             fostered,
-            adopted: model.adopted.filter((dog) => {
-                return dog.get('app_adoption_date').getUTCFullYear() === 2022
+            adopted: adopted.filter((dog) => {
+                return dog.get('app_adoption_date').getUTCFullYear() === year
             }).sortBy('app_adoption_date').reverse(),
         });
     },

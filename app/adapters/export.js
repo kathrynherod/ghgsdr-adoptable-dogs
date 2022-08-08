@@ -19,6 +19,7 @@ export default DS.JSONAPIAdapter.extend({
             queryParams = '&search[status]=Intake,Treatment,Boarding';
 
         } else if (query.type === 'fostered') {
+            limit = 100;
             queryParams = '&search[status]=Fostered,Fostered - Pending Adoption,Pending Adoption,Foster to Adopt, Fostered - Hold';
 
         } else if (query.type === 'adopted') {
